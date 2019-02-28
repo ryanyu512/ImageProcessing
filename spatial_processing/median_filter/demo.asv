@@ -1,0 +1,40 @@
+clc;clear;close all;
+
+path = 'D:\github\ImageProcessing\spatial_processing\data\';
+
+I = rgb2gray(imread([path,'coin_img.jpg']));
+
+J = imnoise(I, 'salt & pepper', 0.02);
+
+K = medfilt2(J);
+
+[rows, cols] = size(I);
+
+b = J;
+
+d = MedianFilter2D(J, 3);
+
+for i = 2:rows - 1
+    for j = 2:cols - 1
+        
+        mask = [J(i - 1, j - 1), J(i - 1, j), J(i - 1, j + 1),...
+                J(i    , j - 1), J(i    , j), J(i    , j + 1),...
+                J(i + 1, j - 1), J(i + 1, j), J(i + 1, j + 1)];
+           
+        mask = sort(mask);   
+        
+        b(i, j) = mask(5);  
+        if (d(i, j) ~= b(i, j))
+            v = 1;
+        end
+    end
+end
+
+img = b - 
+
+figure(1);
+imshowpair(uint8(b), K, 'montage');
+figure(2);
+imshowpair(J, K, 'montage');
+figure(3);
+imshowpair(uint8(b), d, 'montage');

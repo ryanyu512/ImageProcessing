@@ -19,3 +19,4 @@ if (isempty(new_image))
 end
 
 figure;imshowpair(image, new_image, 'montage');
+imhist(new_image);
