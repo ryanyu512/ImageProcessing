@@ -25,7 +25,7 @@ function out_img = MedianFilter2D(img, mask_size)
     
     med_idx = floor(mask_size^2/2) + 1;
     for i = 1 + half_dims:rows - half_dims
-        for j = 1 + + half_dims:cols - half_dims
+        for j = 1 + half_dims:cols - half_dims
             mask_idx  = (j - 1 + d_x)*rows + (i + d_y);
             cur_idx   = mask_idx(med_idx);
             mask_val = sort(img(mask_idx));     
